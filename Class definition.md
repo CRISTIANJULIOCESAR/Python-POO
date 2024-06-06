@@ -70,6 +70,4 @@ This project serves as a basic introduction to OOP in Python, showing how to def
 
 Feel free to explore and modify the code to learn more about OOP in Python!
 
-### License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
