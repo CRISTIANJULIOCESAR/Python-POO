@@ -1,0 +1,180 @@
+
+# Cine Simulation - README
+
+## Introduction
+
+In this project, we will create a cinema as an object that includes daily showings, movies, seats, and theaters. We will use classes in independent code files for modularity and reusability.
+
+## Class Integration and Reusability
+
+### Seat Class
+
+We define the `Seat` class, representing a seat in the cinema. Each seat has a row, a number, and can be marked as occupied.
+
+```python
+# SeatClass.py
+
+class Seat:
+    def __init__(self, row, number):
+        self.row = row
+        self.number = number
+        self.occupied = False
+
+    def mark_occupied(self):
+        self.occupied = True
+```
+
+### Theater Class
+
+The `Theater` class represents a theater in the cinema. Each theater has a name, a type, and a list of seats.
+
+```python
+# TheaterClass.py
+
+class Theater:
+    def __init__(self, name, theater_type, seat_list):
+        self.name = name
+        self.type = theater_type
+        self.seats = seat_list
+```
+
+### Movie Class
+
+The `Movie` class represents a movie. Each movie has a name, description, genre, and duration. We also create a method to print all the movie's information.
+
+```python
+# MovieClass.py
+
+class Movie:
+    def __init__(self, name, description, genre, duration):
+        self.name = name
+        self.description = description
+        self.genre = genre
+        self.duration = duration
+
+    def info(self):
+        print(f"Movie: {self.name} \nDescription: {self.description} \nGenre: {self.genre} \nDuration: {self.duration}")
+```
+
+### Screening Class
+
+The `Screening` class represents a movie screening. It includes a movie, a theater, and a schedule. Methods are included to print screening information, occupy a seat, start the screening, and finish the screening.
+
+```python
+# ScreeningClass.py
+
+class Screening:
+    def __init__(self, movie, theater, schedule):
+        self.movie = movie
+        self.theater = theater
+        self.schedule = schedule
+        self.started = False
+        self.finished = False
+
+    def info(self):
+        print(f"Movie: {self.movie.name}, Theater: {self.theater.name}, Type: {self.theater.type}, Schedule: {self.schedule}")
+
+    def occupy_seat(self, seat_index):
+        self.theater.seats[seat_index].mark_occupied()
+
+    def start_screening(self):
+        self.started = True
+
+    def finish_screening(self):
+        self.finished = True
+```
+
+### Cinema Class
+
+The `Cinema` class represents a cinema. It includes the name of the cinema, its address, and the list of screenings for the day. Methods are provided to get cinema information, show available screenings, and get the status of seats in a screening.
+
+```python
+# CinemaClass.py
+
+class Cinema:
+    def __init__(self, name, address, screenings):
+        self.name = name
+        self.address = address
+        self.screenings = screenings
+        self.open = True
+
+    def info(self):
+        print(f"Cinema: {self.name} \nAddress: {self.address}")
+
+    def show_screenings(self):
+        print("\nToday's available screenings:\n")
+        for screening in self.screenings:
+            if not screening.finished:
+                screening.info()
+
+    def get_seat_status(self, screening_index):
+        self.screenings[screening_index].movie.info()
+        for seat in self.screenings[screening_index].theater.seats:
+            status = "Occupied" if seat.occupied else "Available"
+            print(f"{seat.number}{seat.row} Status: {status}")
+```
+
+### Main Script
+
+The main script `main.py` integrates all the classes. We will create instances of `Seat`, `Theater`, `Movie`, `Screening`, and `Cinema`, and demonstrate their interactions.
+
+```python
+# main.py
+
+from SeatClass import Seat
+from TheaterClass import Theater
+from MovieClass import Movie
+from ScreeningClass import Screening
+from CinemaClass import Cinema
+
+# Creating seats
+seatA1 = Seat("A", 1)
+seatA2 = Seat("A", 2)
+seatA3 = Seat("A", 3)
+seatB1 = Seat("B", 1)
+seatB2 = Seat("B", 2)
+seatB3 = Seat("B", 3)
+
+# Creating seat list
+seats = [seatA1, seatA2, seatA3, seatB1, seatB2, seatB3]
+
+# Creating theaters
+theater1 = Theater("Theater A1", "Regular", seats)
+theater2 = Theater("Theater A2", "VIP", seats)
+theater3 = Theater("Theater A3", "3D", seats)
+
+# Creating movies
+movie1 = Movie("Inception", "A skilled thief enters people's dreams to steal valuable information.", "Sci-Fi, Action, Thriller", "2 hours 28 minutes")
+movie2 = Movie("Jurassic Park", "A dinosaur-themed park turns chaotic when the dinosaurs escape.", "Sci-Fi, Action, Adventure", "2 hours 7 minutes")
+
+# Creating screenings
+screening1 = Screening(movie1, theater1, "12:00PM")
+screening2 = Screening(movie2, theater2, "12:00PM")
+screening3 = Screening(movie1, theater3, "12:00PM")
+screening4 = Screening(movie2, theater3, "02:00PM")
+
+# Creating screening list
+screenings = [screening1, screening2, screening3, screening4]
+
+# Creating cinema
+cinema = Cinema("Cinépolis Diana", "Paseo Reforma", screenings)
+
+# Using cinema functions
+cinema.info()
+cinema.show_screenings()
+
+cinema.screenings[0].finish_screening()
+cinema.show_screenings()
+
+print("____________________________________________")
+cinema.get_seat_status(0)
+
+cinema.screenings[0].occupy_seat(0)
+cinema.screenings[0].occupy_seat(3)
+cinema.screenings[0].occupy_seat(4)
+
+cinema.get_seat_status(0)
+```
+
+With this setup, we can efficiently manage the cinema's operations, demonstrating the power of class integration and reusability in Python.
+
