@@ -1,7 +1,7 @@
 
 # Cine System
 
-Este proyecto es una simulación de un sistema de cine utilizando Programación Orientada a Objetos (POO). Aquí se explicarán los conceptos fundamentales de POO utilizados en este proyecto: clases, objetos, atributos e instancias, así como la integración de clases en un archivo principal (`main.py`).
+Este proyecto es una simulación de un sistema de cine utilizando Programación Orientada a Objetos (POO). Aquí se explicarán los conceptos fundamentales de POO utilizados en este proyecto: clases, objetos, atributos, instancias y métodos, así como la integración de clases en un archivo principal (`main.py`).
 
 ## Conceptos de POO
 
@@ -18,7 +18,19 @@ Una **clase** es un plano o plantilla para crear objetos. Define un conjunto de 
 Un **objeto** es una instancia de una clase. Es una entidad que tiene estado y comportamiento. Por ejemplo, `asientoA1`, `sala1`, `pelicula1`, `funcion1` y `cine` son objetos creados a partir de sus respectivas clases.
 
 ### Atributos
-Los **atributos** son variables que pertenecen a una clase y definen las propiedades de los objetos de esa clase. Por ejemplo, la clase `Asiento` tiene los atributos `fila`, `numero` y `ocupado`.
+Los **atributos** son variables que pertenecen a una clase y definen las propiedades de los objetos de esa clase. Por ejemplo:
+- La clase `Asiento` tiene los atributos `fila`, `numero` y `ocupado`.
+- La clase `Sala` tiene los atributos `nombre`, `tipo` y `asientos`.
+- La clase `Pelicula` tiene los atributos `nombre`, `descripcion`, `genero` y `duracion`.
+- La clase `Funcion` tiene los atributos `pelicula`, `sala`, `horario`, `started` y `finished`.
+- La clase `Cine` tiene los atributos `cine`, `direccion` y `funciones`.
+
+### Métodos
+Los **métodos** son funciones definidas dentro de una clase que describen los comportamientos de los objetos de esa clase. Por ejemplo:
+- La clase `Asiento` tiene el método `marcarOcupado()`.
+- La clase `Pelicula` tiene el método `info()`.
+- La clase `Funcion` tiene los métodos `info()`, `ocuparAsiento()`, `iniciarFuncion()` y `finalizarFuncion()`.
+- La clase `Cine` tiene los métodos `info()`, `mostrarFunciones()` y `obtenerLugares()`.
 
 ### Instancias
 Una **instancia** es un objeto particular de una clase. Crear una instancia de una clase se llama instanciar la clase. Por ejemplo:
