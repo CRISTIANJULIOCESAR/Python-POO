@@ -39,6 +39,103 @@ asientoA1 = Asiento("A", 1)
 ```
 Esto crea una instancia de la clase `Asiento` con la fila "A" y el número 1.
 
+## Código de las Clases
+
+### Clase Asiento
+
+```python
+class Asiento:
+    
+    def __init__(self, fila, numero):
+        self.fila = fila
+        self.numero = numero
+        self.ocupado = False
+ 
+    def marcarOcupado(self):
+        self.ocupado = True
+```
+
+### Clase Sala
+
+```python
+class Sala:
+    
+    def __init__(self, nombre, tipo, lista_asientos):
+        self.nombre = nombre
+        self.tipo = tipo
+        self.asientos = lista_asientos
+```
+
+### Clase Pelicula
+
+```python
+class Pelicula:
+    
+    def __init__(self, nombre, descripcion, genero, duracion):
+        self.nombre = nombre
+        self.descripcion = descripcion
+        self.genero = genero
+        self.duracion = duracion
+        
+    def info(self):
+        print(f"Película: {self.nombre} \nDescripción: {self.descripcion} \nGénero:({self.genero}) \nDuración:{self.duracion}")
+```
+
+### Clase Funcion
+
+```python
+class Funcion:
+    
+    def __init__(self, pelicula, sala, horario):
+        self.pelicula = pelicula
+        self.sala = sala
+        self.horario = horario
+        self.started = False
+        self.finished = False
+
+        
+    def info(self):
+        print(f"Pelicula: {self.pelicula.nombre}, Sala: {self.sala.nombre}, Tipo: {self.sala.tipo}, Horario: {self.horario}")
+    
+    def ocuparAsiento(self, lugar):
+        self.sala.asientos[lugar].ocupado = True
+        
+    def iniciarFuncion(self):
+        self.started = True
+        
+    def finalizarFuncion(self):
+        self.finished = True
+```
+
+### Clase Cine
+
+```python
+class Cine:
+    
+    def __init__(self, cine, direccion, funciones):
+        self.cine = cine
+        self.direccion = direccion
+        self.funciones = funciones
+        self.open = True
+
+        
+    def info(self):
+        print(f"Cine: {self.cine} \nDirección: {self.direccion}")
+        
+    def mostrarFunciones(self):
+        print("\nFunciones disponibles del día de hoy:\n")
+        for funcion in self.funciones:
+            if not funcion.finished:
+                funcion.info()
+           
+               
+    def obtenerLugares(self, funcion):
+        self.funciones[funcion].pelicula.info()
+        for asiento in self.funciones[funcion].sala.asientos:
+            estado = "Ocupado" if asiento.ocupado else "Disponible"
+            print(f"{asiento.numero}{asiento.fila} Estado: {estado}")
+```
+
 ## Integración de Clases
 
 Para utilizar las clases de manera independiente en archivos de código, podemos importarlas en el archivo principal (`main.py`). Aquí está el código completo con comentarios que explican la importación y uso de las clases:
